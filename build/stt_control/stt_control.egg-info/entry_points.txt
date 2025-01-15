@@ -1,3 +1,4 @@
 [console_scripts]
+bag_to_csv_node = stt_control.bag_to_csv:main
 funnel_drive = stt_control.funnel_drive:main
 

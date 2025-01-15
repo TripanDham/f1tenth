@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "funnel_drive = stt_control.funnel_drive:main"
+            "funnel_drive = stt_control.funnel_drive:main",
+            "bag_to_csv_node = stt_control.bag_to_csv:main"
         ],
     },
 )
