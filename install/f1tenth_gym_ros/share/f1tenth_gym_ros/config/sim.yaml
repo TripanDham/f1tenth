@@ -42,14 +42,14 @@ bridge:
     scan_beams: 1080
 
     # map parameters
-    map_path: '/home/tripan/f1tenthsim_ws/src/f1tenth_gym_ros/maps/levine'
+    map_path: '~/f1tenthsim_ws/f1tenth/src/f1tenth_gym_ros/maps/levine'
     map_img_ext: '.png'
 
     # opponent parameters
     num_agent: 1
 
     # ego starting pose on map
-    sx: 8.0
+    sx: 0.0
     sy: 0.0
     stheta: 0.0
 
