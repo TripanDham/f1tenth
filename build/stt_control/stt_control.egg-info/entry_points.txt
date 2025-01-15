@@ -1,0 +1,3 @@
+[console_scripts]
+funnel_drive = stt_control.funnel_drive:main
+
