@@ -7,6 +7,7 @@ from ackermann_msgs.msg import AckermannDriveStamped
 import numpy as np
 import tf_transformations
 import matplotlib.pyplot as plt
+import csv
 
 
 class DrivePublisherNode(Node):
@@ -41,26 +42,24 @@ class DrivePublisherNode(Node):
         self.rhod_lower = self.get_parameter("rhod_lower").value
         self.rhoo_inf = self.get_parameter("rhoo_inf").value
         
-        radius = 2.5
-        angle = np.pi/2
-        distance = angle*radius
-        time = distance/self.u_av
-        dt = 0.01
-        time_arr = np.arange(0,time,dt)
-        tube_width = 0.2
-        # gamL1 = np.linspace(0 - tube_width,distance - tube_width,len(time_arr))
-        # gamU1 = np.linspace(0 + tube_width,distance + tube_width,len(time_arr))
-
-        gamL1 = np.array([8.0 + radius*np.sin(self.u_av/radius * t) - tube_width for t in np.arange(0,time,dt)])
-        gamU1 = np.array([8.0 + radius*np.sin(self.u_av/radius * t) + tube_width for t in np.arange(0,time,dt)])
-        gamL2 = np.array([radius - radius*np.cos(self.u_av/radius * t) - tube_width for t in np.arange(0,time,dt)])
-        gamU2 = np.array([radius - radius*np.cos(self.u_av/radius * t) + tube_width for t in np.arange(0,time,dt)])
-        
+        self.stt_val = []
+        with open('/home/tripan/f1tenthsim_ws/f1tenth/src/stt_control/tubes/STT.csv', mode='r') as file:
+            csv_reader = csv.reader(file)
+            next(csv_reader)  # Skip the header if present
+            for row in csv_reader:
+                timestamp = float(row[0])
+                x_lower = float(row[1])
+                x_upper = float(row[2])
+                y_lower = -float(row[3])
+                y_upper = -float(row[4])
+                
+                # Append to lists
+                self.stt_val.append([timestamp,x_lower,x_upper,y_lower,y_upper])
 
         # gamL2 = -tube_width * np.ones(len(time_arr))
         # gamU2 = tube_width * np.ones(len(time_arr))
 
-        self.stt_val = np.array((time_arr,gamL1,gamU1,gamL2,gamU2))
+        self.stt_val = np.array(self.stt_val)
 
         # self.use_sim_time = self.declare_parameter('use_sim_time', True)
         self.start_time = round(self.get_clock().now().nanoseconds/1e9, 4)

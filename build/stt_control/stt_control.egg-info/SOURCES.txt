@@ -12,6 +12,8 @@ resource/stt_control
 stt_control/__init__.py
 stt_control/bag_to_csv.py
 stt_control/funnel_drive.py
+stt_control/funnel_drive_sim_path.py
+stt_control/track_traj_to_stt.py
 test/test_copyright.py
 test/test_flake8.py
 test/test_pep257.py

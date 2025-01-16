@@ -45,6 +45,10 @@ ypred = resubPredict(gprMdly);
 
 %% Plot results
 subplot(2,2,1)
+xg = xg + 2*(-2.16);
+yg = yg + 2*(-0.283);
+xpred = xpred;
+ypred = -(ypred);
 plot(tg, xg, 'k.'); hold on;
 plot(tg, xpred, 'g', 'LineWidth', 1.5);
 xlabel('t');
@@ -59,8 +63,8 @@ ylabel('y');
 % legend('Data','GPR predictions');
 
 subplot(2,2,3)
-plot(xg, yg, 'k.'); hold on;
-plot(xpred, ypred, 'g', 'LineWidth', 1.5);
+% plot(xg, yg, 'k.'); hold on;
+plot(ypred + 2*2.16, xpred + 2*0.283, 'g', 'LineWidth', 1.5);
 xlabel('x');
 ylabel('y');
 % legend('Data','GPR predictions');
