@@ -18,10 +18,10 @@ class DrivePublisherNode(Node):
         # self.get_logger().info("DrivePublisherNode has started.")
         self.ego_odom_sub = self.create_subscription(Odometry, '/ego_racecar/odom', self.ego_odom_callback, 10)
 
-        self.declare_parameter("ulim", 0.5)
-        self.declare_parameter("rlim", 0.4)
-        self.declare_parameter("rhod_0", 1.0)
-        self.declare_parameter("rhoo_0", 1.0)
+        self.declare_parameter("ulim", 1.5)
+        self.declare_parameter("rlim", 0.3)
+        self.declare_parameter("rhod_0", 2.0)
+        self.declare_parameter("rhoo_0", 2.0)
         self.declare_parameter("u_av", 0.3)
         self.declare_parameter("decay", 0.02)
         self.declare_parameter("rhod_inf", 0.1)
@@ -45,7 +45,6 @@ class DrivePublisherNode(Node):
         self.stt_val = []
         with open('/home/tripan/f1tenthsim_ws/f1tenth/src/stt_control/tubes/STT.csv', mode='r') as file:
             csv_reader = csv.reader(file)
-            next(csv_reader)  # Skip the header if present
             for row in csv_reader:
                 timestamp = float(row[0])
                 x_lower = float(row[1])
@@ -116,6 +115,9 @@ class DrivePublisherNode(Node):
         self.ref_lower_arr.append(ref_lower)
         self.ref_upper_arr.append(ref_upper)
         
+        print("x ref", (ref_lower[0]+ref_upper[0])/2)
+        print("y ref", (ref_lower[1]+ref_upper[1])/2)
+        
         ex = ((ref_lower[0]+ref_upper[0])/2 - x)/(ref_upper[0] - ref_lower[0])
         ey = ((ref_lower[1]+ref_upper[1])/2 - y)/(ref_upper[1] - ref_lower[1])
 
@@ -160,13 +162,13 @@ class DrivePublisherNode(Node):
 
 
     def get_ref_pose(self,t):
-        gamL1 = self.stt_val[1,:]
-        gamU1 = self.stt_val[2,:]
+        gamL1 = self.stt_val[:,1]
+        gamU1 = self.stt_val[:,2]
 
-        gamL2 = self.stt_val[3,:]
-        gamU2 = self.stt_val[4,:]
+        gamL2 = self.stt_val[:,3]
+        gamU2 = self.stt_val[:,4]
 
-        time_arr = self.stt_val[0,:]
+        time_arr = self.stt_val[:,0]
 
         tube_lower = np.array((np.interp(t, time_arr, gamL1), np.interp(t, time_arr, gamL2)))
         tube_upper = np.array((np.interp(t, time_arr, gamU1), np.interp(t, time_arr, gamU2)))

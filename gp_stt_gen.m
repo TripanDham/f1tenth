@@ -9,7 +9,7 @@ clf;
 A = readmatrix('pose_data.csv');
 nt = 1;
 A = A(1:nt:end,:);
-A = A(800:1100, :);
+A = A(700:1100, :);
 td = A(:,1);
 td = td - td(1);
 n = length(td);
@@ -22,7 +22,7 @@ tg = td;
 xg = x;
 yg = y;
 
-d = 0.2;
+d = 0.4;
 for i = 1
     tg = [tg; flip(td)];
     xg = [xg; flip(x) + 2*d*rand(n,1)-d];
@@ -45,10 +45,10 @@ ypred = resubPredict(gprMdly);
 
 %% Plot results
 subplot(2,2,1)
-xg = xg + 2*(-2.16);
-yg = yg + 2*(-0.283);
+xg = xg;
+yg = yg;
 xpred = xpred;
-ypred = -(ypred);
+ypred = (ypred);
 plot(tg, xg, 'k.'); hold on;
 plot(tg, xpred, 'g', 'LineWidth', 1.5);
 xlabel('t');
@@ -64,7 +64,7 @@ ylabel('y');
 
 subplot(2,2,3)
 % plot(xg, yg, 'k.'); hold on;
-plot(ypred + 2*2.16, xpred + 2*0.283, 'g', 'LineWidth', 1.5);
+plot(xpred, ypred, 'g', 'LineWidth', 1.5);
 xlabel('x');
 ylabel('y');
 % legend('Data','GPR predictions');
