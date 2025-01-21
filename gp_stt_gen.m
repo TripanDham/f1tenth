@@ -22,7 +22,7 @@ tg = td;
 xg = x;
 yg = y;
 
-d = 0.4;
+d = 0.2;
 for i = 1
     tg = [tg; flip(td)];
     xg = [xg; flip(x) + 2*d*rand(n,1)-d];
@@ -44,6 +44,15 @@ gprMdly = fitrgp(tg, yg, 'KernelFunction', 'squaredexponential', ...
 ypred = resubPredict(gprMdly);
 
 %% Plot results
+
+len = 0;
+speed_arr = [];
+for i = 1:(length(xpred) - 1)
+    dist = sqrt((xpred(i+1) - xpred(i))^2 + (ypred(i+1) - ypred(i))^2);
+    len = len + dist;
+    speed_arr = [speed_arr; dist/(tg(i+1) - tg(i))];
+end
+
 subplot(2,2,1)
 xg = xg;
 yg = yg;
@@ -68,6 +77,9 @@ plot(xpred, ypred, 'g', 'LineWidth', 1.5);
 xlabel('x');
 ylabel('y');
 % legend('Data','GPR predictions');
+
+subplot(2,2,4)
+plot(tg(1:end-1),speed_arr);
 
 %% Kernel Information for X
 sigma = gprMdlx.KernelInformation.KernelParameters;

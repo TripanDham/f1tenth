@@ -18,12 +18,12 @@ class DrivePublisherNode(Node):
         # self.get_logger().info("DrivePublisherNode has started.")
         self.ego_odom_sub = self.create_subscription(Odometry, '/ego_racecar/odom', self.ego_odom_callback, 10)
 
-        self.declare_parameter("ulim", 1.0)
-        self.declare_parameter("rlim", 0.4)
-        self.declare_parameter("rhod_0", 2.0)
-        self.declare_parameter("rhoo_0", 2.0)
+        self.declare_parameter("ulim", 0.8)
+        self.declare_parameter("rlim", 0.5)
+        self.declare_parameter("rhod_0", 1.0)
+        self.declare_parameter("rhoo_0", 1.0)
         self.declare_parameter("u_av", 0.3)
-        self.declare_parameter("decay", 0.02)
+        self.declare_parameter("decay", 0.01)
         self.declare_parameter("rhod_inf", 0.1)
         self.declare_parameter("rhod_lower", -0.1)
         self.declare_parameter("rhoo_inf", 0.01)
@@ -130,7 +130,7 @@ class DrivePublisherNode(Node):
         rhod = self.rhod_inf + (self.rhod_0 - self.rhod_inf) * np.exp(-self.decay*t)
         Xid = 2*(ed - 0.5*(rhod + self.rhod_inf))/(rhod - self.rhod_lower)
         epsd = self.transform(Xid) * self.ulim
-        cmd_vel = epsd
+        cmd_vel = epsd + self.u_av
 
         self.rhod_arr.append(rhod)
 
@@ -204,7 +204,7 @@ class DrivePublisherNode(Node):
         # Plot 3: eo vs time
         axs[1, 0].plot(self.eo_arr, label='eo (orientation error)', color='orange')
         axs[1, 0].plot(self.rhoo_arr, label = 'funnel upper')
-        axs[1, 0].plot(-1 * self.rhoo_arr, label = 'funnel lower')
+        axs[1, 0].plot([-1*x for x in self.rhoo_arr], label = 'funnel lower')
         axs[1, 0].set_title('eo vs Time')
         axs[1, 0].set_xlabel('Time')
         axs[1, 0].set_ylabel('eo')

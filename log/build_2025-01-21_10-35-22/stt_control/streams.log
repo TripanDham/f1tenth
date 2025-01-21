@@ -1,0 +1,25 @@
+[1.050s] Invoking command in '/home/tripan/f1tenthsim_ws/f1tenth/src/stt_control': PYTHONPATH=/home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/stt_control build --build-base /home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/build install --record /home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/install.log --single-version-externally-managed install_data
+[1.347s] running egg_info
+[1.347s] writing ../../build/stt_control/stt_control.egg-info/PKG-INFO
+[1.348s] writing dependency_links to ../../build/stt_control/stt_control.egg-info/dependency_links.txt
+[1.348s] writing entry points to ../../build/stt_control/stt_control.egg-info/entry_points.txt
+[1.348s] writing requirements to ../../build/stt_control/stt_control.egg-info/requires.txt
+[1.348s] writing top-level names to ../../build/stt_control/stt_control.egg-info/top_level.txt
+[1.350s] reading manifest file '../../build/stt_control/stt_control.egg-info/SOURCES.txt'
+[1.351s] writing manifest file '../../build/stt_control/stt_control.egg-info/SOURCES.txt'
+[1.351s] running build
+[1.351s] running build_py
+[1.352s] copying stt_control/funnel_drive.py -> /home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/build/lib/stt_control
+[1.352s] running install
+[1.353s] running install_lib
+[1.353s] copying /home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/build/lib/stt_control/funnel_drive.py -> /home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/python3.10/site-packages/stt_control
+[1.354s] byte-compiling /home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/python3.10/site-packages/stt_control/funnel_drive.py to funnel_drive.cpython-310.pyc
+[1.356s] running install_data
+[1.356s] running install_egg_info
+[1.358s] removing '/home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/python3.10/site-packages/stt_control-0.0.0-py3.10.egg-info' (and everything under it)
+[1.359s] Copying ../../build/stt_control/stt_control.egg-info to /home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/python3.10/site-packages/stt_control-0.0.0-py3.10.egg-info
+[1.360s] running install_scripts
+[1.381s] Installing bag_to_csv_node script to /home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/stt_control
+[1.381s] Installing funnel_drive script to /home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/stt_control
+[1.382s] writing list of installed files to '/home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/install.log'
+[1.416s] Invoked command in '/home/tripan/f1tenthsim_ws/f1tenth/src/stt_control' returned '0': PYTHONPATH=/home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/tripan/f1tenthsim_ws/f1tenth/install/stt_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/stt_control build --build-base /home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/build install --record /home/tripan/f1tenthsim_ws/f1tenth/build/stt_control/install.log --single-version-externally-managed install_data
